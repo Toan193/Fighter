@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1741369654 source:d:\fighter\main.cpp
+1741542641 source:d:\fighter\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
+	"initialize.h"
 
 1698944750 d:\sdl2-2.28.5\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -402,4 +403,24 @@
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
+
+1741493640 source:d:\fighter\initialize.cpp
+	"initialize.h"
+
+1741542216 d:\fighter\initialize.h
+	<SDL.h>
+	<SDL_image.h>
+	"CommonFunc.h"
+
+1741542608 source:d:\fighter\animations.cpp
+	"Animations.h"
+	"CommonFunc.h"
+
+1741542596 d:\fighter\commonfunc.h
+
+1741513848 source:d:\fighter\commonfunc.cpp
+	"CommonFunc.h"
+
+1741542596 d:\fighter\animations.h
+	"CommonFunc.h"
 
