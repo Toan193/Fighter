@@ -5,12 +5,12 @@ void SDLCommonFunc::logErrorAndExit(const char* msg, const char* error)
     SDL_Quit();
 }
 
-SDL_Window* SDLCommonFunc::initSDL(int SCREEN_WIDTH, int SCREEN_HEIGHT, const char* WINDOW_TITLE)
+SDL_Window* SDLCommonFunc::initSDL(int SCREEN_WIDTH, int SCREEN_HEIGHT)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         SDLCommonFunc::logErrorAndExit("SDL_Init", SDL_GetError());
 
-    SDL_Window* window = SDL_CreateWindow(WINDOW_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Fighter", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 
     if (window == nullptr) SDLCommonFunc::logErrorAndExit("CreateWindow", SDL_GetError());
@@ -56,6 +56,15 @@ SDL_Texture* SDLCommonFunc::loadTexture(const char *filename, SDL_Renderer* rend
 
 	return texture;
 }
+
+void SDLCommonFunc::quitSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture)
+{
+    SDL_DestroyTexture(texture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+}
+
 
 
 

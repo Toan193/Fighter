@@ -1,57 +1,75 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
-#include "initialize.h"
 #include "CommonFunc.h"
+#include "BaseObject.h"
+#include "MainObject.h"
 
 const char* WINDOW_TITLE = "Fighter";
 const char* bground_file = "bground.png";
 const char* air_force_file = "air_force.png";
 const char* air_force_and_shield_file = "";
-
-SDL_Window* window = NULL;
-SDL_Renderer *renderer = NULL;
-SDL_Texture *background = NULL;
-SDL_Event g_even;
+const Uint8* state = SDL_GetKeyboardState(NULL);
+SDL_Event e;
 
 using namespace std;
 
 
 int main(int argc, char *argv[])
 {
-    window = SDLCommonFunc::initSDL(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_TITLE);
-    renderer = SDLCommonFunc::createRenderer(window);
-    background = SDLCommonFunc::loadTexture(bground_file, renderer);
+    // khởi tạo ảnh nền
+    BaseObject bg;
+    SDL_Renderer *renderer = bg.setRenderer();
+    bg.loadImg("bground.png", renderer);
+    SDL_Rect rec;
+
+    // khởi tạo nhân vật chính
+    MainObject Fighter;
+    Fighter.loadImg("air_force.png", renderer);
 
     bool quit = false;
-    SDL_Event e;
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
                 quit = true;
             }
+            else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE) {
+                quit = true;
+            }
         }
 
-        //renderTexture(air_force, 0, 0, renderer);
-        //SDL_RenderPresent( renderer );
-
-
         // Vẽ background
-        SDL_Rect destRect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-        SDL_RenderCopy(renderer, background, NULL, &destRect);
+
+        if (state[SDL_SCANCODE_UP]) {
+            Fighter.turnUp();
+        }
+        if (state[SDL_SCANCODE_DOWN]) {
+            Fighter.turnDown();
+        }
+        if (state[SDL_SCANCODE_LEFT]) {
+            Fighter.turnLeft();
+        }
+        if (state[SDL_SCANCODE_RIGHT]) {
+            Fighter.turnRight();
+        }
+
+        // clip nền
+        SDL_RenderClear(renderer);
+        bg.clip(renderer, rec);
+
+        // nhân vật chính
+        Fighter.show(renderer);
 
         SDL_RenderPresent(renderer);
-
-        //di chuyển máy bay
-
+        SDL_Delay(16);
 
     }
 
 
-    SDL_DestroyTexture( background );
-    background = NULL;
+    //SDL_DestroyTexture( background );
+    //background = NULL;
 
-    quitSDL(window, renderer);
+    //SDLCommonFunc::quitSDL(window, renderer, background);
     return 0;
 }
 

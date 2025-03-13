@@ -42,11 +42,12 @@
 		</Compiler>
 		<Unit filename="Animations.cpp" />
 		<Unit filename="Animations.h" />
+		<Unit filename="BaseObject.cpp" />
+		<Unit filename="BaseObject.h" />
 		<Unit filename="CommonFunc.cpp" />
 		<Unit filename="CommonFunc.h" />
-		<Unit filename="Game.h" />
-		<Unit filename="initialize.cpp" />
-		<Unit filename="initialize.h" />
+		<Unit filename="MainObject.cpp" />
+		<Unit filename="MainObject.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

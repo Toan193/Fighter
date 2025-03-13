@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1741584812 source:d:\fighter\main.cpp
+1741884277 source:d:\fighter\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
-	"initialize.h"
 	"CommonFunc.h"
+	"BaseObject.h"
+	"MainObject.h"
 
 1698944750 d:\sdl2-2.28.5\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -417,20 +418,28 @@
 	"Animations.h"
 	"CommonFunc.h"
 
-1741711422 d:\fighter\commonfunc.h
+1741855033 d:\fighter\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<string>
 
-1741711422 source:d:\fighter\commonfunc.cpp
+1741796098 source:d:\fighter\commonfunc.cpp
 	"CommonFunc.h"
 
 1741543326 d:\fighter\animations.h
 
-1741711257 source:d:\fighter\baseobject.cpp
-
-1741711117 d:\fighter\baseobject.h
+1741883953 source:d:\fighter\baseobject.cpp
+	"BaseObject.h"
 	"CommonFunc.h"
 
-1741711257 source:d:\fighter\mainobject.cpp
+1741883675 d:\fighter\baseobject.h
+	"CommonFunc.h"
+
+1741854444 source:d:\fighter\mainobject.cpp
+	"MainObject.h"
+
+1741854444 d:\fighter\mainobject.h
+	"CommonFunc.h"
+	"BaseObject.h"
+	<vector>
 
