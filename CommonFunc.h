@@ -7,12 +7,13 @@
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
-const int PLAYER_WIDTH = 335;
-const int PLAYER_HEIGHT = 745;
-const int BEGIN_PLAYER_X = 350;
-const int BEGIN_PLAYER_Y = -10;
-const int speed_bg = 2;
-const int speed = 5;
+const int PLAYER_WIDTH = 80;
+const int PLAYER_HEIGHT = 90;
+const int BEGIN_PLAYER_X = 500;
+const int BEGIN_PLAYER_Y = 600;
+const int speed_bg = 1;
+const int speed_bullet = 8;
+const int speed = 6;
 
 namespace SDLCommonFunc
 {

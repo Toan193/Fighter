@@ -4,6 +4,7 @@
 #include "CommonFunc.h"
 #include "BaseObject.h"
 #include "MainObject.h"
+#include "BulletObject.h"
 
 const char* WINDOW_TITLE = "Fighter";
 const char* bground_file = "bground.png";
@@ -21,11 +22,14 @@ int main(int argc, char *argv[])
     BaseObject bg;
     SDL_Renderer *renderer = bg.setRenderer();
     bg.loadImg("bground.png", renderer);
-    SDL_Rect rec;
 
     // khởi tạo nhân vật chính
     MainObject Fighter;
     Fighter.loadImg("air_force.png", renderer);
+
+    // khởi tạo đạn
+    BulletObject bullet;
+    bullet.loadImg("bullet (1).png", renderer);
 
     bool quit = false;
     while (!quit) {
@@ -38,8 +42,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        // Vẽ background
-
+        // di chuyển nhân vật
         if (state[SDL_SCANCODE_UP]) {
             Fighter.turnUp();
         }
@@ -52,16 +55,23 @@ int main(int argc, char *argv[])
         if (state[SDL_SCANCODE_RIGHT]) {
             Fighter.turnRight();
         }
+        // cập nhật vị trí đạn
+        if (state[SDL_SCANCODE_SPACE]) {
+            Fighter.nap_dan(renderer);
+        }
 
         // clip nền
         SDL_RenderClear(renderer);
-        bg.clip(renderer, rec);
+        bg.clip(renderer);
 
-        // nhân vật chính
+        // nhân vật chính và bắn đạn
         Fighter.show(renderer);
 
+        // bắn
+        Fighter.shoot(renderer);
+
         SDL_RenderPresent(renderer);
-        SDL_Delay(16);
+        SDL_Delay(20);
 
     }
 

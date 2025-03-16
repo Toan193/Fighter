@@ -7,6 +7,12 @@ BaseObject::BaseObject()
     desRect.y = 0;
     desRect.w = SCREEN_WIDTH;
     desRect.h = SCREEN_HEIGHT;
+
+    Rec.x = 0;
+    Rec.y = -SCREEN_HEIGHT;
+    Rec.w = SCREEN_WIDTH;
+    Rec.h = SCREEN_HEIGHT;
+
     object = NULL;
 }
 
@@ -35,21 +41,17 @@ void BaseObject::show(SDL_Renderer* renderer)
     SDL_RenderCopy(renderer, object, NULL, &desRect);
 }
 
-void BaseObject::clip(SDL_Renderer* renderer, SDL_Rect rec)
+void BaseObject::clip(SDL_Renderer* renderer)
 {
-    rec = { 0, -SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT };
     desRect.y += speed_bg;
-    rec.y += speed_bg;
+    Rec.y += speed_bg;
     if (desRect.y >= SCREEN_HEIGHT) {
-        desRect.y = rec.y - SCREEN_HEIGHT;
+        desRect.y = Rec.y - SCREEN_HEIGHT;
     }
-    if (rec.y >= SCREEN_HEIGHT) {
-        rec.y = desRect.y - SCREEN_HEIGHT;
+    if (Rec.y >= SCREEN_HEIGHT) {
+        Rec.y = desRect.y - SCREEN_HEIGHT;
     }
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, object, NULL, &desRect);
-
-    SDL_RenderCopy(renderer, object, NULL, &rec);
-
-
+    SDL_RenderCopy(renderer, object, NULL, &Rec);
 }
