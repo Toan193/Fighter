@@ -3,17 +3,22 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include <string>
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
 const int PLAYER_WIDTH = 80;
 const int PLAYER_HEIGHT = 90;
+const int THREAT_SIZE = 152;
 const int BEGIN_PLAYER_X = 500;
 const int BEGIN_PLAYER_Y = 600;
 const int speed_bg = 1;
 const int speed_bullet = 8;
 const int speed = 6;
+const int speed_threat_max = 4;
+const int speed_threat_min = 3;
+const int number_of_threat = 20;
+const int reload_time = 3000;
+const int bullet_max = 10;
 
 namespace SDLCommonFunc
 {

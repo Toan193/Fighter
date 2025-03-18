@@ -37,9 +37,15 @@ void MainObject::turnDown()
 
 void MainObject::nap_dan(SDL_Renderer* renderer)
 {
-    BulletObject* bullet = new BulletObject(this->desRect.x , desRect.ycc );
-    bullet->loadImg("bullet.png", renderer);
-    bullet_list.push_back(bullet);
+    if (bulletsLeft > 0) {
+        BulletObject* bullet = new BulletObject(this->desRect.x , desRect.y );
+        bullet->loadImg("bullet.png", renderer);
+        bullet_list.push_back(bullet);
+        --bulletsLeft;
+        if (bulletsLeft == 0 ) {
+        lastReloadTime = SDL_GetTicks();
+        }
+    }
 }
 
 void MainObject::shoot(SDL_Renderer* renderer)
@@ -60,4 +66,33 @@ void MainObject::shoot(SDL_Renderer* renderer)
         }
     }
 }
+
+// tải lại dạn sau 3s hết đạn
+void MainObject::reloadBullet()
+{
+    if (bulletsLeft == 0 && SDL_GetTicks() - lastReloadTime >= reload_time) {
+        bulletsLeft = bullet_max;
+    }
+}
+
+void MainObject::create_asteroid(SDL_Renderer* renderer)
+{
+    for (int i = 0; i < number_of_threat; i++) {
+        ThreatObject* asteroid = new ThreatObject();
+        asteroid->loadImg("Threat.png", renderer);
+        asteroids.push_back(asteroid);
+    }
+}
+
+void MainObject::show_asteroid(SDL_Renderer* renderer)
+{
+    for (int i = 0; i < number_of_threat; i++) {
+        ThreatObject* asteroid = asteroids.at(i);
+        if (asteroid != NULL) {
+            asteroid->update_asteroid();
+            asteroid->show(renderer);
+        }
+    }
+}
+
 

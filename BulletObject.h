@@ -13,6 +13,7 @@ public:
     ~BulletObject();
     void update();
     bool isActive;
+private:
 };
 
 

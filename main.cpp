@@ -27,9 +27,13 @@ int main(int argc, char *argv[])
     MainObject Fighter;
     Fighter.loadImg("air_force.png", renderer);
 
+    // Khởi tạo thiên thạch
+    MainObject threat;
+    threat.create_asteroid(renderer);
+
     // khởi tạo đạn
     BulletObject bullet;
-    bullet.loadImg("bullet (1).png", renderer);
+    bool spacePress = false;
 
     bool quit = false;
     while (!quit) {
@@ -55,7 +59,7 @@ int main(int argc, char *argv[])
         if (state[SDL_SCANCODE_RIGHT]) {
             Fighter.turnRight();
         }
-        // cập nhật vị trí đạn
+        // tạo đạn
         if (state[SDL_SCANCODE_SPACE]) {
             Fighter.nap_dan(renderer);
         }
@@ -64,11 +68,15 @@ int main(int argc, char *argv[])
         SDL_RenderClear(renderer);
         bg.clip(renderer);
 
-        // nhân vật chính và bắn đạn
+        // nhân vật chính
         Fighter.show(renderer);
 
-        // bắn
+        // thiên thạch
+        threat.show_asteroid(renderer);
+
+        // bắn đạn
         Fighter.shoot(renderer);
+        Fighter.reloadBullet();
 
         SDL_RenderPresent(renderer);
         SDL_Delay(20);

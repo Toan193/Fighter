@@ -4,6 +4,7 @@
 #include "CommonFunc.h"
 #include "BaseObject.h"
 #include "BulletObject.h"
+#include "ThreatObject.h"
 #include <vector>
 
 
@@ -19,9 +20,14 @@ public:
     void turnDown();
     void nap_dan(SDL_Renderer* renderer);
     void shoot(SDL_Renderer* renderer);
-
+    void reloadBullet();
+    void create_asteroid(SDL_Renderer* renderer);
+    void show_asteroid(SDL_Renderer* renderer);
+    int bulletsLeft = bullet_max;
 private:
     std::vector<BulletObject*> bullet_list;
+    std::vector<ThreatObject*> asteroids;
+    Uint32 lastReloadTime = 0;
 };
 
 
