@@ -24,9 +24,9 @@ BaseObject::~BaseObject()
     }
 }
 
-SDL_Renderer* BaseObject::setRenderer()
+SDL_Renderer* BaseObject::setRenderer(SDL_Window* window)
 {
-    SDL_Window* window = SDLCommonFunc::initSDL(SCREEN_WIDTH, SCREEN_HEIGHT);
+    window = SDLCommonFunc::initSDL(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_Renderer *renderer = SDLCommonFunc::createRenderer(window);
     return renderer;
 }
@@ -54,4 +54,14 @@ void BaseObject::clip(SDL_Renderer* renderer)
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, object, NULL, &desRect);
     SDL_RenderCopy(renderer, object, NULL, &Rec);
+}
+
+void BaseObject::QuitSDL(SDL_Renderer* &renderer, SDL_Window* &window)
+{
+    SDL_DestroyWindow(window);
+    window = NULL;
+    SDL_DestroyTexture(object);
+    object = nullptr;
+    SDL_DestroyRenderer(renderer);
+    renderer = nullptr;
 }

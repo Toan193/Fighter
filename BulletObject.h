@@ -13,7 +13,7 @@ public:
     ~BulletObject();
     void update();
     bool isActive;
-private:
+    void delete_bullet(SDL_Texture* &texture);
 };
 
 

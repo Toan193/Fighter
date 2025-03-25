@@ -20,22 +20,30 @@ MainObject::~MainObject()
 //di chuyển nhân vật
 void MainObject::turnLeft()
 {
-    desRect.x -= speed;
+    if (desRect.x > 0) {
+        desRect.x -= speed;
+    }
 }
 void MainObject::turnRight()
 {
-    desRect.x += speed;
+    if (desRect. x < SCREEN_WIDTH - PLAYER_WIDTH) {
+        desRect.x += speed;
+    }
 }
 void MainObject::turnUp()
 {
-    desRect.y -= speed;
+    if (desRect.y > 0) {
+        desRect.y -= speed;
+    }
 }
 void MainObject::turnDown()
 {
-    desRect.y += speed;
+    if (desRect.y < SCREEN_HEIGHT - PLAYER_HEIGHT) {
+        desRect.y += speed;
+    }
 }
 
-void MainObject::nap_dan(SDL_Renderer* renderer)
+void MainObject::nap_dan(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list)
 {
     if (bulletsLeft > 0) {
         BulletObject* bullet = new BulletObject(this->desRect.x , desRect.y );
@@ -48,7 +56,7 @@ void MainObject::nap_dan(SDL_Renderer* renderer)
     }
 }
 
-void MainObject::shoot(SDL_Renderer* renderer)
+void MainObject::shoot(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list)
 {
     for (int i = 0; i < bullet_list.size(); i++) {
         BulletObject* bullet = bullet_list.at(i);
@@ -75,8 +83,9 @@ void MainObject::reloadBullet()
     }
 }
 
-void MainObject::create_asteroid(SDL_Renderer* renderer)
+void MainObject::create_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids)
 {
+
     for (int i = 0; i < number_of_threat; i++) {
         ThreatObject* asteroid = new ThreatObject();
         asteroid->loadImg("Threat.png", renderer);
@@ -84,7 +93,7 @@ void MainObject::create_asteroid(SDL_Renderer* renderer)
     }
 }
 
-void MainObject::show_asteroid(SDL_Renderer* renderer)
+void MainObject::show_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids)
 {
     for (int i = 0; i < number_of_threat; i++) {
         ThreatObject* asteroid = asteroids.at(i);
@@ -94,5 +103,6 @@ void MainObject::show_asteroid(SDL_Renderer* renderer)
         }
     }
 }
+
 
 

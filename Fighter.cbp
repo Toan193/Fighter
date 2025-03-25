@@ -46,6 +46,8 @@
 		<Unit filename="BulletObject.h" />
 		<Unit filename="CommonFunc.cpp" />
 		<Unit filename="CommonFunc.h" />
+		<Unit filename="ExplosionObject.cpp" />
+		<Unit filename="ExplosionObject.h" />
 		<Unit filename="Feature.cpp" />
 		<Unit filename="Feature.h" />
 		<Unit filename="MainObject.cpp" />

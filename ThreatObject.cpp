@@ -19,3 +19,10 @@ void ThreatObject::update_asteroid()
         speed = speed_threat_min + rand() % (speed_threat_max - speed_threat_min + 1);
     }
 }
+
+void ThreatObject::delete_asteroid()
+{
+    desRect.x = rand() % (SCREEN_WIDTH - THREAT_SIZE);
+    desRect.y = -THREAT_SIZE;
+    speed = speed_threat_min + rand() % (speed_threat_max - speed_threat_min + 1);
+}

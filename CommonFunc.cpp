@@ -57,11 +57,28 @@ SDL_Texture* SDLCommonFunc::loadTexture(const char *filename, SDL_Renderer* rend
 	return texture;
 }
 
-void SDLCommonFunc::quitSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture)
+void SDLCommonFunc::show_clip_exp(SDL_Renderer* renderer)
 {
-    SDL_DestroyTexture(texture);
+
+}
+
+bool SDLCommonFunc::collision_check(const SDL_Rect& object1, const SDL_Rect& object2)
+{
+    SDL_Rect a = object1;
+    SDL_Rect b = object2;
+    return (a.x < b.x + b.w &&
+            a.x + a.w > b.x &&
+            a.y < b.y + b.h &&
+            a.y + a.h > b.y);
+}
+
+
+void SDLCommonFunc::quitSDL(SDL_Window* window, SDL_Renderer* renderer)
+{
     SDL_DestroyRenderer(renderer);
+    renderer = nullptr;
     SDL_DestroyWindow(window);
+    window = nullptr;
     SDL_Quit();
 }
 

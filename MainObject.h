@@ -11,22 +11,20 @@
 class MainObject : public BaseObject
 {
 public:
-
+    int bulletsLeft = bullet_max;
     MainObject();
     ~MainObject();
     void turnLeft();
     void turnRight();
     void turnUp();
     void turnDown();
-    void nap_dan(SDL_Renderer* renderer);
-    void shoot(SDL_Renderer* renderer);
+    void nap_dan(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list);
+    void shoot(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list);
     void reloadBullet();
-    void create_asteroid(SDL_Renderer* renderer);
-    void show_asteroid(SDL_Renderer* renderer);
-    int bulletsLeft = bullet_max;
+    void create_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids);
+    void show_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids);
+
 private:
-    std::vector<BulletObject*> bullet_list;
-    std::vector<ThreatObject*> asteroids;
     Uint32 lastReloadTime = 0;
 };
 

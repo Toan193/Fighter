@@ -14,7 +14,7 @@ public:
     ~ThreatObject();
     void init_asteroid();
     void update_asteroid();
-
+    void delete_asteroid();
 private:
     int speed;
 };

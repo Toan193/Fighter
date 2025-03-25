@@ -20,6 +20,7 @@ const int number_of_threat = 20;
 const int reload_time = 3000;
 const int bullet_max = 10;
 
+
 namespace SDLCommonFunc
 {
     //hàm báo lỗi
@@ -28,12 +29,12 @@ namespace SDLCommonFunc
     SDL_Window* initSDL(int SCREEN_WIDTH, int SCREEN_HEIGHT);
     // tạo renderer
     SDL_Renderer* createRenderer(SDL_Window* window);
-    //hàm thoát
-    void quitSDL(SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* texture);
+    void quitSDL(SDL_Window* window, SDL_Renderer* renderer);
     SDL_Renderer* createRenderer(SDL_Window* window);
     void renderTexture(SDL_Texture *texture, int x, int y, SDL_Renderer* renderer);
     SDL_Texture *loadTexture(const char *filename, SDL_Renderer* renderer);
-
+    void show_clip_exp(SDL_Renderer* renderer);
+    bool collision_check(const SDL_Rect& rec1, const SDL_Rect& rec2);
 
 }
 

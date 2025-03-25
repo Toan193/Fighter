@@ -26,4 +26,12 @@ void BulletObject::update()
     if (desRect.y < 0) isActive = false;
 }
 
+void BulletObject::delete_bullet(SDL_Texture* &texture)
+{
+    if (texture != nullptr) {
+        SDL_DestroyTexture(texture);
+        texture == nullptr;
+    }
+}
+
 
