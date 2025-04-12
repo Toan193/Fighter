@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1742835838 source:d:\fighter\main.cpp
+1743439558 source:d:\fighter\main.cpp
 	<windows.h>
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
 	"CommonFunc.h"
 	"BaseObject.h"
 	"MainObject.h"
@@ -421,11 +423,13 @@
 	"Animations.h"
 	"CommonFunc.h"
 
-1742607500 d:\fighter\commonfunc.h
+1743161947 d:\fighter\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
 
-1742835771 source:d:\fighter\commonfunc.cpp
+1743440701 source:d:\fighter\commonfunc.cpp
 	"CommonFunc.h"
 
 1741543326 d:\fighter\animations.h
@@ -434,16 +438,17 @@
 	"BaseObject.h"
 	"CommonFunc.h"
 
-1742835703 d:\fighter\baseobject.h
+1743094969 d:\fighter\baseobject.h
 	"CommonFunc.h"
 
-1742921481 source:d:\fighter\mainobject.cpp
+1743438218 source:d:\fighter\mainobject.cpp
 	"MainObject.h"
 	"BaseObject.h"
 	"BulletObject.h"
 	<algorithm>
+	<SDL_mixer.h>
 
-1742606841 d:\fighter\mainobject.h
+1743438218 d:\fighter\mainobject.h
 	"CommonFunc.h"
 	"BaseObject.h"
 	"BulletObject.h"
@@ -470,10 +475,11 @@
 	<cstdlib>
 	<ctime>
 
-1742607500 source:d:\fighter\explosionobject.cpp
+1743158352 source:d:\fighter\explosionobject.cpp
 	"ExplosionObject.h"
 
-1742921481 d:\fighter\explosionobject.h
+1743158418 d:\fighter\explosionobject.h
+	<vector>
 	"BaseObject.h"
 	"CommonFunc.h"
 

@@ -7,7 +7,8 @@ void SDLCommonFunc::logErrorAndExit(const char* msg, const char* error)
 
 SDL_Window* SDLCommonFunc::initSDL(int SCREEN_WIDTH, int SCREEN_HEIGHT)
 {
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    if (SDL_Init
+        (SDL_INIT_EVERYTHING) != 0)
         SDLCommonFunc::logErrorAndExit("SDL_Init", SDL_GetError());
 
     SDL_Window* window = SDL_CreateWindow("Fighter", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -17,7 +18,12 @@ SDL_Window* SDLCommonFunc::initSDL(int SCREEN_WIDTH, int SCREEN_HEIGHT)
 
     if (!IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG))
         SDLCommonFunc::logErrorAndExit( "SDL_image error:", IMG_GetError());
-
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        SDLCommonFunc::logErrorAndExit( "SDL_mixer  error:", IMG_GetError());
+    }
+    if (TTF_Init() < 0) {
+        SDLCommonFunc::logErrorAndExit( "SDL_ttf  error:", IMG_GetError());
+    }
     return window;
 }
 
@@ -57,19 +63,22 @@ SDL_Texture* SDLCommonFunc::loadTexture(const char *filename, SDL_Renderer* rend
 	return texture;
 }
 
-void SDLCommonFunc::show_clip_exp(SDL_Renderer* renderer)
-{
-
-}
-
 bool SDLCommonFunc::collision_check(const SDL_Rect& object1, const SDL_Rect& object2)
 {
-    SDL_Rect a = object1;
-    SDL_Rect b = object2;
-    return (a.x < b.x + b.w &&
-            a.x + a.w > b.x &&
-            a.y < b.y + b.h &&
-            a.y + a.h > b.y);
+    int left_a = object1.x + 5;
+    int right_a = object1.x + object1.w - 5;
+    int top_a = object1.y + 5;
+    int bottom_a = object1.y + object1.h - 5;
+
+    int left_b = object2.x + 5;
+    int right_b = object2.x + object2.w - 5;
+    int top_b = object2.y + 5;
+    int bottom_b = object2.y + object2.h - 5;
+
+    if (right_a < left_b || right_b < left_a || bottom_a < top_b || bottom_b < top_a) {
+        return false;
+    }
+    return true;
 }
 
 

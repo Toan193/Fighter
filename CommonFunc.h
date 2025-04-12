@@ -3,6 +3,8 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h>
 
 const int SCREEN_WIDTH = 1080;
 const int SCREEN_HEIGHT = 720;
@@ -33,7 +35,6 @@ namespace SDLCommonFunc
     SDL_Renderer* createRenderer(SDL_Window* window);
     void renderTexture(SDL_Texture *texture, int x, int y, SDL_Renderer* renderer);
     SDL_Texture *loadTexture(const char *filename, SDL_Renderer* renderer);
-    void show_clip_exp(SDL_Renderer* renderer);
     bool collision_check(const SDL_Rect& rec1, const SDL_Rect& rec2);
 
 }

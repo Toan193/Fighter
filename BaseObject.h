@@ -11,6 +11,11 @@ public:
     {
         return desRect;
     }
+    void setRect(const int &x, const int &y)
+    {
+        desRect.x = x;
+        desRect.y = y;
+    }
     void show(SDL_Renderer* renderer);
     void loadImg(const char* file_name, SDL_Renderer *renderer);
     SDL_Renderer* setRenderer(SDL_Window* window);

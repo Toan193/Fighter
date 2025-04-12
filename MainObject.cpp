@@ -2,6 +2,7 @@
 #include "BaseObject.h"
 #include "BulletObject.h"
 #include <algorithm>
+#include <SDL_mixer.h>
 
 MainObject::MainObject()
 {
@@ -47,7 +48,7 @@ void MainObject::nap_dan(SDL_Renderer* renderer, std::vector<BulletObject*>& bul
 {
     if (bulletsLeft > 0) {
         BulletObject* bullet = new BulletObject(this->desRect.x , desRect.y );
-        bullet->loadImg("bullet.png", renderer);
+        bullet->loadImg("Image/bullet.png", renderer);
         bullet_list.push_back(bullet);
         --bulletsLeft;
         if (bulletsLeft == 0 ) {
@@ -88,7 +89,7 @@ void MainObject::create_asteroid(SDL_Renderer* renderer, std::vector<ThreatObjec
 
     for (int i = 0; i < number_of_threat; i++) {
         ThreatObject* asteroid = new ThreatObject();
-        asteroid->loadImg("Threat.png", renderer);
+        asteroid->loadImg("Image/Threat.png", renderer);
         asteroids.push_back(asteroid);
     }
 }
