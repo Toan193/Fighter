@@ -77,10 +77,11 @@ void MainObject::shoot(SDL_Renderer* renderer, std::vector<BulletObject*>& bulle
 }
 
 // tải lại dạn sau 3s hết đạn
-void MainObject::reloadBullet()
+void MainObject::reloadBullet(int &numberOfBullet)
 {
     if (bulletsLeft == 0 && SDL_GetTicks() - lastReloadTime >= reload_time) {
         bulletsLeft = bullet_max;
+        if (numberOfBullet == 0) numberOfBullet = bullet_max;
     }
 }
 

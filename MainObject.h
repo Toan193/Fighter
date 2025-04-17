@@ -20,7 +20,7 @@ public:
     void turnDown();
     void nap_dan(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list);
     void shoot(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list);
-    void reloadBullet();
+    void reloadBullet(int &numberOfBullet);
     void create_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids);
     void show_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids);
 

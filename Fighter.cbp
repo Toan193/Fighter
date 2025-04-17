@@ -50,6 +50,7 @@
 		<Unit filename="ExplosionObject.h" />
 		<Unit filename="Feature.cpp" />
 		<Unit filename="Feature.h" />
+		<Unit filename="Interface.h" />
 		<Unit filename="MainObject.cpp" />
 		<Unit filename="MainObject.h" />
 		<Unit filename="ThreatObject.cpp" />

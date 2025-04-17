@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1743439558 source:d:\fighter\main.cpp
+1744558217 source:d:\fighter\main.cpp
 	<windows.h>
 	<iostream>
+	<fstream>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -11,6 +12,7 @@
 	"MainObject.h"
 	"BulletObject.h"
 	"ExplosionObject.h"
+	"Interface.h"
 
 1698944750 d:\sdl2-2.28.5\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -429,7 +431,7 @@
 	<SDL_mixer.h>
 	<SDL_ttf.h>
 
-1743440701 source:d:\fighter\commonfunc.cpp
+1744536782 source:d:\fighter\commonfunc.cpp
 	"CommonFunc.h"
 
 1741543326 d:\fighter\animations.h
@@ -441,14 +443,14 @@
 1743094969 d:\fighter\baseobject.h
 	"CommonFunc.h"
 
-1743438218 source:d:\fighter\mainobject.cpp
+1744537609 source:d:\fighter\mainobject.cpp
 	"MainObject.h"
 	"BaseObject.h"
 	"BulletObject.h"
 	<algorithm>
 	<SDL_mixer.h>
 
-1743438218 d:\fighter\mainobject.h
+1744537565 d:\fighter\mainobject.h
 	"CommonFunc.h"
 	"BaseObject.h"
 	"BulletObject.h"
@@ -481,5 +483,14 @@
 1743158418 d:\fighter\explosionobject.h
 	<vector>
 	"BaseObject.h"
+	"CommonFunc.h"
+
+1744533612 source:d:\fighter\interface.cpp
+
+1744557851 d:\fighter\interface.h
+	<string>
+	<SDL_ttf.h>
+	<SDL.h>
+	<SDL_image.h>
 	"CommonFunc.h"
 
