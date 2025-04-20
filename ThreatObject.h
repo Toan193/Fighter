@@ -12,7 +12,6 @@ class ThreatObject : public BaseObject
 public:
     ThreatObject();
     ~ThreatObject();
-    void init_asteroid();
     void update_asteroid();
     void delete_asteroid();
 private:

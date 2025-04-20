@@ -44,6 +44,12 @@ int main(int argc, char *argv[])
     exp_main.loadImg("Image/explosion.png", renderer);
     exp_main.set_exp_clip();
 
+    // Biến dùng cho các bổ trợ
+    bool is_left,is_right, is_up, is_down;
+    bool flash_active = false;
+    int count_flash = 0;
+    int point = 0;
+
     // các biến tạo âm thanh
     Mix_AllocateChannels(16);
     Mix_Chunk* shot_sound = Mix_LoadWAV("Sound/shot_sound.wav");
@@ -53,6 +59,8 @@ int main(int argc, char *argv[])
     int numberOfBullet = bullet_max;
     int score = 0;
     int BestScore;
+    Uint32 gameStart = SDL_GetTicks();
+    Uint32 gameTime;
     std::ifstream in_file("DataFile.txt");
     in_file >> BestScore;
     in_file.close();
@@ -78,28 +86,41 @@ int main(int argc, char *argv[])
                     Mix_PlayChannel(-1, shot_sound, 0);
                 }
             }
+
+            if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_c && count_flash > 0) flash_active = true;
         }
 
         // clip nền
         SDL_RenderClear(renderer);
         bg.clip(renderer);
 
+        // nhân vật chính
+        Fighter.show(renderer);
+
+        is_left = false, is_right = false, is_up = false, is_down = false;
         // di chuyển nhân vật
         if (state[SDL_SCANCODE_UP]) {
             Fighter.turnUp();
+            is_up = true;
         }
         if (state[SDL_SCANCODE_DOWN]) {
             Fighter.turnDown();
+            is_down = true;
         }
         if (state[SDL_SCANCODE_LEFT]) {
             Fighter.turnLeft();
+            is_left = true;
         }
         if (state[SDL_SCANCODE_RIGHT]) {
             Fighter.turnRight();
+            is_right = true;
         }
-
-        // nhân vật chính
-        Fighter.show(renderer);
+        if (flash_active && count_flash > 0) {
+            Fighter.flash(is_left, is_right, is_up, is_down);
+            flash_active = false;
+            --count_flash;
+            point = score;
+        }
 
         // thiên thạch
         threat.show_asteroid(renderer, asteroid_list);
@@ -110,6 +131,8 @@ int main(int argc, char *argv[])
 
         // giao diện game
         game_index(renderer, numberOfBullet, score, BestScore);
+        clock(renderer, Fighter.lastReloadTime, numberOfBullet);
+        inter_flash(renderer, score, count_flash, point);
 
         // xử lí các va chạm
         bool CollisionFighterAndThreat = false;
@@ -183,6 +206,7 @@ int main(int argc, char *argv[])
 
         SDL_RenderPresent(renderer);
         SDL_Delay(26);
+        gameTime = SDL_GetTicks();
     }
 
     std::ofstream out_file("DataFile.txt");

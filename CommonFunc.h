@@ -21,7 +21,7 @@ const int speed_threat_min = 3;
 const int number_of_threat = 20;
 const int reload_time = 3000;
 const int bullet_max = 10;
-
+const int distance_flash = 100;
 
 namespace SDLCommonFunc
 {

@@ -2,6 +2,7 @@
 #include "BaseObject.h"
 #include "BulletObject.h"
 #include <algorithm>
+#include <cmath>
 #include <SDL_mixer.h>
 
 MainObject::MainObject()
@@ -59,7 +60,7 @@ void MainObject::nap_dan(SDL_Renderer* renderer, std::vector<BulletObject*>& bul
 
 void MainObject::shoot(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list)
 {
-    for (int i = 0; i < bullet_list.size(); i++) {
+    for (int i = 0; i < (int)bullet_list.size(); i++) {
         BulletObject* bullet = bullet_list.at(i);
         if (bullet != NULL) {
             if (bullet->isActive == true) {
@@ -106,5 +107,48 @@ void MainObject::show_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*
     }
 }
 
+// hàm các bổ trợ
+void MainObject::flash(const bool &is_left, const bool &is_right, const bool &is_up, const bool &is_down)
+{
+    int left = 0, right = 0, up = 0, down = 0;
+    int dis = distance_flash*0.70710678;
+    if (is_right)
+    {
+        if (is_up)
+        {
+            right = dis;
+            up = -dis;
+        }
+        if (is_down)
+        {
+            right = dis;
+            down = dis;
+        }
+        if (!is_up && !is_down) right = distance_flash;
+    } else {
+        if (is_up) up = -distance_flash;
+        if (is_down) down = distance_flash;
+    }
+    if (is_left)
+    {
+        if (is_up)
+        {
+            left = -dis;
+            up = -dis;
+        }
+        if (is_down)
+        {
+            left = -dis;
+            down = dis;
+        }
+        if (!is_up && !is_down) left = -distance_flash;
+    }
+    desRect.x += left + right;
+    if (desRect.x >= SCREEN_WIDTH - PLAYER_WIDTH) desRect.x = SCREEN_WIDTH - PLAYER_WIDTH;
+    if (desRect.x <= 0) desRect.x = 0;
+    desRect.y += up + down;
+    if (desRect.y >= SCREEN_HEIGHT - PLAYER_HEIGHT) desRect.y = SCREEN_HEIGHT - PLAYER_HEIGHT;
+    if (desRect.y <= 0) desRect.y = 0;
+}
 
 

@@ -23,8 +23,7 @@ public:
     void reloadBullet(int &numberOfBullet);
     void create_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids);
     void show_asteroid(SDL_Renderer* renderer, std::vector<ThreatObject*>& asteroids);
-
-private:
+    void flash(const bool &is_left, const bool &is_right, const bool &is_up, const bool &is_down);
     Uint32 lastReloadTime = 0;
 };
 
