@@ -45,11 +45,6 @@ void MainObject::turnDown()
     }
 }
 
-void MainObject::delete_fighter()
-{
-    object = NULL;
-}
-
 void MainObject::nap_dan(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list)
 {
     if (bulletsLeft > 0) {

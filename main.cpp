@@ -168,7 +168,6 @@ int game()
                         Mix_PlayChannel(-1, exp_sound, 0);
                     }
                     asteroid->delete_asteroid();
-                    Fighter.delete_fighter();
                     SDL_Delay(100);
                     showGameOver(renderer, font1, font, restart);
                     quit = true;

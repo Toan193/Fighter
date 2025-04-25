@@ -33,17 +33,6 @@ SDL_Renderer* SDLCommonFunc::createRenderer(SDL_Window* window)
     return renderer;
 }
 
-void SDLCommonFunc::renderTexture(SDL_Texture *texture, int x, int y, SDL_Renderer* renderer)
-{
-	SDL_Rect dest;
-
-	dest.x = x;
-	dest.y = y;
-	SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
-
-	SDL_RenderCopy(renderer, texture, NULL, &dest);
-}
-
 SDL_Texture* SDLCommonFunc::loadTexture(const char *filename, SDL_Renderer* renderer)
 {
 	SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
@@ -72,18 +61,6 @@ bool SDLCommonFunc::collision_check(const SDL_Rect& object1, const SDL_Rect& obj
     }
     return true;
 }
-
-
-void SDLCommonFunc::quitSDL(SDL_Window* window, SDL_Renderer* renderer)
-{
-    SDL_DestroyRenderer(renderer);
-    renderer = nullptr;
-    SDL_DestroyWindow(window);
-    window = nullptr;
-    SDL_Quit();
-}
-
-
 
 
 
