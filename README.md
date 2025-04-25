@@ -83,4 +83,4 @@ Các nguồn tham khảo: 1945 Air Force, Pinteres, Liên quân Moblie.
 - Folder Font: chứa phông chữ dùng trong game
 - File DataFile: chứa dữ liệu điểm cao nhất
 
-
+Video demo: [https://drive.google.com/file/d/15izXjxzwXue9CHNNfI0ipn3hw3S5YcIZ/view?usp=drive_link](https://drive.google.com/file/d/15izXjxzwXue9CHNNfI0ipn3hw3S5YcIZ/view?usp=drive_link)
