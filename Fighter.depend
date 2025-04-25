@@ -488,7 +488,7 @@
 
 1744533612 source:d:\fighter\interface.cpp
 
-1745577859 d:\fighter\interface.h
+1745578786 d:\fighter\interface.h
 	<string>
 	<cmath>
 	<SDL_ttf.h>

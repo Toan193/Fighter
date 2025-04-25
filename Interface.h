@@ -119,22 +119,22 @@ void showGameOver(SDL_Renderer* renderer, TTF_Font* font1, TTF_Font* font, bool&
     SDL_Color white = {255, 255, 255};
     SDL_Color red = {255, 0, 0};
 
-    SDL_Surface* textSurface1 = TTF_RenderText_Solid(font1, "Game Over", red);
-    SDL_Surface* textSurface2 = TTF_RenderText_Solid(font, "Do you want to play again? (Y/N)", white);
+    SDL_Surface* Surface1 = TTF_RenderText_Solid(font1, "Game Over", red);
+    SDL_Surface* Surface2 = TTF_RenderText_Solid(font, "Do you want to play again? (Y/N)", white);
 
-    SDL_Texture* text1 = SDL_CreateTextureFromSurface(renderer, textSurface1);
-    SDL_Texture* text2 = SDL_CreateTextureFromSurface(renderer, textSurface2);
+    SDL_Texture* text1 = SDL_CreateTextureFromSurface(renderer, Surface1);
+    SDL_Texture* text2 = SDL_CreateTextureFromSurface(renderer, Surface2);
 
     int w1, h1, w2, h2;
     SDL_QueryTexture(text1, NULL, NULL, &w1, &h1);
     SDL_QueryTexture(text2, NULL, NULL, &w2, &h2);
 
-    SDL_Rect dst1 = {480, 300, w1 , h1};
-    SDL_Rect dst2 = {400, 350, w2 + 50, h2 + 10};
+    SDL_Rect des1 = {480, 300, w1 , h1};
+    SDL_Rect des2 = {400, 350, w2 + 70, h2 + 10};
 
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, text1, NULL, &dst1);
-    SDL_RenderCopy(renderer, text2, NULL, &dst2);
+    SDL_RenderCopy(renderer, text1, NULL, &des1);
+    SDL_RenderCopy(renderer, text2, NULL, &des2);
     SDL_RenderPresent(renderer);
 
     SDL_Event e;
@@ -158,8 +158,8 @@ void showGameOver(SDL_Renderer* renderer, TTF_Font* font1, TTF_Font* font, bool&
         }
     }
 
-    SDL_FreeSurface(textSurface1);
-    SDL_FreeSurface(textSurface2);
+    SDL_FreeSurface(Surface1);
+    SDL_FreeSurface(Surface2);
     SDL_DestroyTexture(text1);
     SDL_DestroyTexture(text2);
 }
