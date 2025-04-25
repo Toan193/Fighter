@@ -59,7 +59,7 @@ bool SDLCommonFunc::collision_check(const SDL_Rect& object1, const SDL_Rect& obj
 {
     int left_a = object1.x + 5;
     int right_a = object1.x + object1.w - 5;
-    int top_a = object1.y + 5;
+    int top_a = object1.y + 30;
     int bottom_a = object1.y + object1.h - 5;
 
     int left_b = object2.x + 10;

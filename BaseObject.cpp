@@ -64,4 +64,5 @@ void BaseObject::QuitSDL(SDL_Renderer* &renderer, SDL_Window* &window)
     object = nullptr;
     SDL_DestroyRenderer(renderer);
     renderer = nullptr;
+    SDL_Quit();
 }

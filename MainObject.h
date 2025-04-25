@@ -18,6 +18,7 @@ public:
     void turnRight();
     void turnUp();
     void turnDown();
+    void delete_fighter();
     void nap_dan(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list);
     void shoot(SDL_Renderer* renderer, std::vector<BulletObject*>& bullet_list);
     void reloadBullet(int &numberOfBullet);

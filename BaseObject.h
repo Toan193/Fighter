@@ -24,7 +24,7 @@ public:
 
 protected:
     SDL_Rect desRect;
-    SDL_Rect Rec; // Rect để làm clip
+    SDL_Rect Rec; // Rect để làm clip background
     SDL_Texture* object;
 };
 

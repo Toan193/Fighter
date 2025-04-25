@@ -8,7 +8,7 @@
 #include <SDL_image.h>
 #include "CommonFunc.h"
 
-void game_index(SDL_Renderer* renderer, const int &number_bullet, const int &score, const int &BestScore)
+void game_index(SDL_Renderer* renderer, TTF_Font* font, const int &number_bullet, const int &score, const int &BestScore)
 {
     // hiển thị lượng đạn còn lại
     SDL_Texture* textureOfBulletImage = SDLCommonFunc::loadTexture("Image/bullet.png", renderer);
@@ -16,7 +16,6 @@ void game_index(SDL_Renderer* renderer, const int &number_bullet, const int &sco
     SDL_RenderCopy(renderer, textureOfBulletImage, NULL, &bullet_rect);
 
     SDL_Color color = {255, 255, 255};
-    TTF_Font* font = TTF_OpenFont("Font/cs_regular.ttf", 18);
     std::string number_bullet_string = std::to_string(number_bullet);
     int lenText = number_bullet_string.length();
     SDL_Surface* surfaceOfNumberBullet = TTF_RenderText_Blended(font, number_bullet_string.c_str(), color);
@@ -66,7 +65,7 @@ void game_index(SDL_Renderer* renderer, const int &number_bullet, const int &sco
     SDL_FreeSurface(surfaceOfBestScore);
 }
 
-void clock(SDL_Renderer* renderer, const Uint32 &startTime, const int &number_bullet)
+void clock(SDL_Renderer* renderer, TTF_Font* font, const Uint32 &startTime, const int &number_bullet)
 {
     SDL_Texture* texture = SDLCommonFunc::loadTexture("Image/clock.png", renderer);
     SDL_Rect rect = {SCREEN_WIDTH - 70, 50, 30, 30};
@@ -80,7 +79,6 @@ void clock(SDL_Renderer* renderer, const Uint32 &startTime, const int &number_bu
     } else time_left = 0;
     std::string timeLeft = std::to_string(time_left);
     SDL_Color color = {255, 255, 255};
-    TTF_Font* font = TTF_OpenFont("Font/cs_regular.ttf", 18);
     SDL_Surface* surface = TTF_RenderText_Blended(font, timeLeft.c_str(), color);
     SDL_Texture* textureText = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_Rect rectText = {SCREEN_WIDTH - 35, 57, 14, 20};
@@ -91,7 +89,7 @@ void clock(SDL_Renderer* renderer, const Uint32 &startTime, const int &number_bu
     SDL_FreeSurface(surface);
 }
 
-void inter_flash(SDL_Renderer* renderer, const int &score, int &count_flash, int &point)
+void inter_flash(SDL_Renderer* renderer, TTF_Font* font, const int &score, int &count_flash, int &point)
 {
     SDL_Texture* texture = SDLCommonFunc::loadTexture("Image/Flash.png", renderer);
     SDL_Rect rect = {SCREEN_WIDTH - 150, 3, 32, 32};
@@ -107,7 +105,6 @@ void inter_flash(SDL_Renderer* renderer, const int &score, int &count_flash, int
 
     std::string countFlash = std::to_string(count_flash);
     SDL_Color color = {255, 255, 255};
-    TTF_Font* font = TTF_OpenFont("Font/cs_regular.ttf", 18);
     SDL_Surface* surface = TTF_RenderText_Blended(font, countFlash.c_str(), color);
     SDL_Texture* textureText = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_Rect rectText = {SCREEN_WIDTH - 110, 7, 14, 20};
@@ -116,5 +113,54 @@ void inter_flash(SDL_Renderer* renderer, const int &score, int &count_flash, int
     SDL_DestroyTexture(texture);
     SDL_DestroyTexture(textureText);
     SDL_FreeSurface(surface);
+}
+
+void showGameOver(SDL_Renderer* renderer, TTF_Font* font1, TTF_Font* font, bool& restart) {
+    SDL_Color white = {255, 255, 255};
+    SDL_Color red = {255, 0, 0};
+
+    SDL_Surface* textSurface1 = TTF_RenderText_Solid(font1, "Game Over", red);
+    SDL_Surface* textSurface2 = TTF_RenderText_Solid(font, "Do you want to play again? (Y/N)", white);
+
+    SDL_Texture* text1 = SDL_CreateTextureFromSurface(renderer, textSurface1);
+    SDL_Texture* text2 = SDL_CreateTextureFromSurface(renderer, textSurface2);
+
+    int w1, h1, w2, h2;
+    SDL_QueryTexture(text1, NULL, NULL, &w1, &h1);
+    SDL_QueryTexture(text2, NULL, NULL, &w2, &h2);
+
+    SDL_Rect dst1 = {480, 300, w1 , h1};
+    SDL_Rect dst2 = {400, 350, w2 + 50, h2 + 10};
+
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, text1, NULL, &dst1);
+    SDL_RenderCopy(renderer, text2, NULL, &dst2);
+    SDL_RenderPresent(renderer);
+
+    SDL_Event e;
+    bool waiting = true;
+    while (waiting) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT) {
+                waiting = false;
+                restart = false;
+            }
+            if (e.type == SDL_KEYDOWN) {
+                if (e.key.keysym.sym == SDLK_y) {
+                    restart = true;
+                    waiting = false;
+                }
+                if (e.key.keysym.sym == SDLK_n) {
+                    restart = false;
+                    waiting = false;
+                }
+            }
+        }
+    }
+
+    SDL_FreeSurface(textSurface1);
+    SDL_FreeSurface(textSurface2);
+    SDL_DestroyTexture(text1);
+    SDL_DestroyTexture(text2);
 }
 #endif // INTERFACE_H

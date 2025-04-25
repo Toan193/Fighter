@@ -11,6 +11,7 @@
 #include "BulletObject.h"
 #include "ExplosionObject.h"
 #include "Interface.h"
+using namespace std;
 
 const char* WINDOW_TITLE = "Fighter";
 const Uint8* state = SDL_GetKeyboardState(NULL);
@@ -19,10 +20,19 @@ SDL_Event e;
 std::vector<ThreatObject*> asteroid_list;
 std::vector<BulletObject*> bullet_list;
 
+int game();
+
 int main(int argc, char *argv[])
+{
+    game();
+    return 0;
+}
+
+int game()
 {
     SDL_Window* window;
 
+    bool restart = false;
     // khởi tạo ảnh nền
     BaseObject bg;
     SDL_Renderer *renderer = bg.setRenderer(window);
@@ -59,11 +69,11 @@ int main(int argc, char *argv[])
     int numberOfBullet = bullet_max;
     int score = 0;
     int BestScore;
-    Uint32 gameStart = SDL_GetTicks();
-    Uint32 gameTime;
     std::ifstream in_file("DataFile.txt");
     in_file >> BestScore;
     in_file.close();
+    TTF_Font* font = TTF_OpenFont("Font/cs_regular.ttf", 18);
+    TTF_Font* font1 = TTF_OpenFont("Font/Sddystopiandemo-GO7xa.ttf", 24);
 
     bool quit = false;
     while (!quit) {
@@ -130,9 +140,9 @@ int main(int argc, char *argv[])
         Fighter.reloadBullet(numberOfBullet); // hồi lại đạn sau 3s
 
         // giao diện game
-        game_index(renderer, numberOfBullet, score, BestScore);
-        clock(renderer, Fighter.lastReloadTime, numberOfBullet);
-        inter_flash(renderer, score, count_flash, point);
+        game_index(renderer, font, numberOfBullet, score, BestScore);
+        clock(renderer, font, Fighter.lastReloadTime, numberOfBullet);
+        inter_flash(renderer, font, score, count_flash, point);
 
         // xử lí các va chạm
         bool CollisionFighterAndThreat = false;
@@ -147,26 +157,24 @@ int main(int argc, char *argv[])
                 CollisionFighterAndThreat = SDLCommonFunc::collision_check(asteroid->get_rect(), Fighter.get_rect());
                 if (CollisionFighterAndThreat)
                 {
-                    /*for (int i = 0; i < 8; ++i)
+                    for (int i = 0; i < 8; ++i)
                     {
-                        int x_pos = Fighter.get_rect().x ;
-                        int y_pos = Fighter.get_rect().y ;
+                        int x_pos = Fighter.get_rect().x - 0.5*PLAYER_WIDTH;
+                        int y_pos = Fighter.get_rect().y - 0.5*PLAYER_HEIGHT;
 
                         exp_main.set_frame(i);
                         exp_main.setRect(x_pos, y_pos);
                         exp_main.show_clip_exp(renderer);
-
+                        Mix_PlayChannel(-1, exp_sound, 0);
                     }
-                    Mix_PlayChannel(-1, exp_sound, 0);
-                    SDL_Delay(1000);
-                    //Fighter.setRect(BEGIN_PLAYER_X, BEGIN_PLAYER_Y);
-
-                    //bg.QuitSDL(renderer, window);
-                    //SDL_Quit();*/
-
+                    asteroid->delete_asteroid();
+                    Fighter.delete_fighter();
+                    SDL_Delay(100);
+                    showGameOver(renderer, font1, font, restart);
+                    quit = true;
                 }
 
-                // kiểm tra va chạm đạn của nhân vật chính và threat
+                // kiểm tra va chạm đạn và threat
                 for (unsigned int i = 0; i < bullet_list.size(); i++)
                 {
                     BulletObject* bullet = bullet_list.at(i);
@@ -177,6 +185,7 @@ int main(int argc, char *argv[])
                         {
                             ++score;
                             if (score > BestScore) BestScore = score;
+
                             // tạo vụ nổ
                             for (int i = 0; i < 8; ++i)
                             {
@@ -188,6 +197,7 @@ int main(int argc, char *argv[])
                                 exp_main.show_clip_exp(renderer);
                                 Mix_PlayChannel(-1, exp_sound, 0);
                             }
+
                             // xóa viên đạn
                             bullet_list.erase(bullet_list.begin() + i);
                             if (bullet != nullptr)
@@ -205,22 +215,26 @@ int main(int argc, char *argv[])
         }
 
         SDL_RenderPresent(renderer);
-        SDL_Delay(26);
-        gameTime = SDL_GetTicks();
+        SDL_Delay(16);
     }
 
     std::ofstream out_file("DataFile.txt");
     out_file << BestScore;
     out_file.close();
 
+    bullet_list.clear();
+    asteroid_list.clear();
+    TTF_CloseFont(font);
     Mix_FreeChunk(shot_sound);
     Mix_FreeChunk(exp_sound);
     Mix_CloseAudio();
+    TTF_Quit();
+    IMG_Quit();
+    Mix_Quit();
     bg.QuitSDL(renderer, window);
-    SDL_Quit();
+    if (restart) game();
     return 0;
 }
-
 
 
 
