@@ -16,7 +16,7 @@ const int BEGIN_PLAYER_Y = 600;
 const int speed_bg = 1;
 const int speed_bullet = 8;
 const int speed = 6;
-const int speed_threat_max = 10;
+const int speed_threat_max = 6;
 const int speed_threat_min = 4;
 const int number_of_threat = 20;
 const int reload_time = 3000;
@@ -33,7 +33,6 @@ namespace SDLCommonFunc
     SDL_Renderer* createRenderer(SDL_Window* window);
     SDL_Texture *loadTexture(const char *filename, SDL_Renderer* renderer);
     bool collision_check(const SDL_Rect& rec1, const SDL_Rect& rec2);
-
 }
 
 #endif // COMMON_FUNCTION_H_

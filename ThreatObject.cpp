@@ -5,7 +5,7 @@ ThreatObject::ThreatObject()
     desRect.w = THREAT_SIZE;
     desRect.h = THREAT_SIZE;
     desRect.x = rand() % (SCREEN_WIDTH - THREAT_SIZE);
-    desRect.y = rand() % 100;
+    desRect.y = - (rand() % SCREEN_HEIGHT);
     speed = speed_threat_min + rand() % (speed_threat_max - speed_threat_min + 1);
 }
 

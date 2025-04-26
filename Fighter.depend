@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1745592300 source:d:\fighter\main.cpp
+1745602660 source:d:\fighter\main.cpp
 	<windows.h>
 	<iostream>
 	<fstream>
@@ -425,13 +425,13 @@
 	"Animations.h"
 	"CommonFunc.h"
 
-1745592246 d:\fighter\commonfunc.h
+1745602660 d:\fighter\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>
 
-1745592246 source:d:\fighter\commonfunc.cpp
+1745596442 source:d:\fighter\commonfunc.cpp
 	"CommonFunc.h"
 
 1741543326 d:\fighter\animations.h
@@ -440,10 +440,10 @@
 	"BaseObject.h"
 	"CommonFunc.h"
 
-1745574530 d:\fighter\baseobject.h
+1745601262 d:\fighter\baseobject.h
 	"CommonFunc.h"
 
-1745592300 source:d:\fighter\mainobject.cpp
+1745596442 source:d:\fighter\mainobject.cpp
 	"MainObject.h"
 	"BaseObject.h"
 	"BulletObject.h"
@@ -451,7 +451,7 @@
 	<cmath>
 	<SDL_mixer.h>
 
-1745595854 d:\fighter\mainobject.h
+1745596442 d:\fighter\mainobject.h
 	"CommonFunc.h"
 	"BaseObject.h"
 	"BulletObject.h"
